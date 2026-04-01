@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>诚恳道歉 | 这次是我错了</title>
+    <!-- 使用更清爽的字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #d4eaf7 0%, #b8d8fc 50%, #7bb3db 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* 几何装饰背景 - 简洁不可爱 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px),
+                repeating-linear-gradient(135deg, rgba(60,80,100,0.02) 0px, rgba(60,80,100,0.02) 1px, transparent 1px, transparent 12px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 主卡片 - 冷色调，棱角分明一点 */
+        .apology-card {
+            max-width: 580px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+            padding: 36px 32px 44px;
+            text-align: center;
+            transition: all 0.2s ease;
+            animation: slideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(72, 120, 160, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 简洁标题 */
+        .title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1e4a6b;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .title .icon {
+            font-size: 2rem;
+            filter: none;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: #e6f0f9;
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 40px;
+            color: #2c6285;
+            margin-bottom: 28px;
+            letter-spacing: 0.3px;
+            border: 1px solid #caddf0;
+        }
+
+        /* 道歉信息区域 - 干净利落 */
+        .message-box {
+            background: #f5faff;
+            border-radius: 24px;
+            padding: 24px 22px;
+            margin: 12px 0 20px;
+            border: 1px solid #cfe2f5;
+            transition: 0.2s;
+        }
+
+        .message-box p {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #2c3e4e;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .message-box .highlight {
+            background: #e2effa;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #1a5d84;
+            display: inline-block;
+        }
+
+        .quote-line {
+            font-size: 1rem;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid #d4e3f5;
+            font-weight: 600;
+            color: #2c6285;
+            letter-spacing: 0.3px;
+        }
+
+        /* 简约几何图案 - 不用动物/可爱元素 */
+        .pattern-area {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 16px 0 12px;
+            flex-wrap: wrap;
+        }
+
+        .geo-shape {
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #3c7a9e;
+            transition: all 0.2s;
+            border: 1.5px solid #bdd8f0;
+            background: rgba(255,255,255,0.6);
+        }
+
+        /* 按钮区域 */
+        .button-zone {
+            margin: 28px 0 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 70px;
+        }
+
+        .btn {
+            border: none;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-forgive {
+            background: #2c7cb6;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 0 #175d8a;
+        }
+
+        .btn-forgive:hover {
+            transform: translateY(-2px);
+            background: #3a8bc8;
+            box-shadow: 0 6px 0 #175d8a;
+        }
+
+        .btn-forgive:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #175d8a;
+        }
+
+        /* 逃跑按钮 - 灰色/冷色调 */
+        .btn-runaway {
+            background: #e2e8f0;
+            color: #2c5a7a;
+            border: 1px solid #cbdde9;
+            box-shadow: 0 3px 0 #b9c8d6;
+        }
+
+        .btn-runaway:hover {
+            background: #d0dbe8;
+        }
+
+        .attempt-counter {
+            margin-top: 18px;
+            background: #ecf3f9;
+            border-radius: 40px;
+            padding: 6px 16px;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #2c6285;
+            font-family: monospace;
+            letter-spacing: 0.3px;
+        }
+
+        footer {
+            margin-top: 28px;
+            font-size: 0.7rem;
+            color: #5f8aaa;
+            opacity: 0.7;
+        }
+
+        /* 成功面板 - 蓝色清爽风 */
+        .success-area {
+            background: #eef5fc;
+            border-radius: 32px;
+            padding: 32px 28px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #bfdaf0;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.4s ease;
+            max-width: 580px;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-area h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: #1e6a5e;
+            margin: 12px 0 8px;
+        }
+
+        .success-area p {
+            color: #2c5a6e;
+            font-weight: 500;
+        }
+
+        .badge-count {
+            background: #d4e3f5;
+            border-radius: 30px;
+            padding: 5px 14px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .reset-btn {
+            background: #2c7cb6;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .reset-btn:hover {
+            background: #1e6a9b;
+            transform: scale(0.98);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 响应式 */
+        @media (max-width: 550px) {
+            .apology-card {
+                padding: 24px 20px 32px;
+            }
+            .title {
+                font-size: 1.8rem;
+            }
+            .btn {
+                font-size: 0.95rem;
+                padding: 10px 22px;
+            }
+            .geo-shape {
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="apology-card" id="apologyCard">
+    <div class="title">
+        <span class="icon">⚡</span> 抱歉 <span class="icon">◆</span>
+    </div>
+    <div class="sub">诚恳致歉 · 绝无下次</div>
+
+    <div class="message-box">
+        <p>兄弟 / 老铁：</p>
+        <p>这次是我考虑不周，<span class="highlight">把事情搞砸了</span>。<br>
+        让你感到不爽或者失望，真的过意不去。</p>
+        <p>我已经认真反思过了，该认的错绝不狡辩。<br>
+        希望能给个机会，让我弥补。</p>
+        <div class="quote-line">→ 接受这份道歉，咱们还是好兄弟 ←</div>
+    </div>
+
+    <!-- 简约几何图案，不用动物/可爱风 -->
+    <div class="pattern-area">
+        <div class="geo-shape">■</div>
+        <div class="geo-shape">●</div>
+        <div class="geo-shape">▲</div>
+        <div class="geo-shape">◆</div>
+    </div>
+
+    <div class="button-zone" id="buttonZone">
+        <button class="btn btn-forgive" id="forgiveBtn">✓ 接受道歉</button>
+        <button class="btn btn-runaway" id="runawayBtn">✗ 不太满意</button>
+    </div>
+
+    <div class="attempt-counter" id="counterBox">
+        被拒绝了 <span id="attemptCount">0</span> 次 · 但我态度诚恳
+    </div>
+    <footer>· 点击「接受道歉」解锁诚意 · 点「不太满意」我会更认真 ·</footer>
+</div>
+
+<!-- 成功面板 -->
+<div id="successPanel" class="success-area hidden">
+    <div style="font-size: 2.8rem;">🤝 ✓</div>
+    <h2>感谢信任</h2>
+    <p>你的大度让我惭愧，之后一定用行动证明。</p>
+    <div class="badge-count" id="finalCountMsg"></div>
+    <button class="reset-btn" id="resetBtn">⟳ 重新来过</button>
+</div>
+
+<script>
+    (function(){
+        // DOM 元素
+        const card = document.getElementById('apologyCard');
+        const successPanel = document.getElementById('successPanel');
+        const forgiveBtn = document.getElementById('forgiveBtn');
+        const runawayBtn = document.getElementById('runawayBtn');
+        const counterSpan = document.getElementById('attemptCount');
+        const buttonZone = document.getElementById('buttonZone');
+        const counterBox = document.getElementById('counterBox');
+
+        let rejectCount = 0;           // 拒绝次数
+        let forgiven = false;          // 是否已经原谅/接受道歉
+        let originalLeft = null;
+        let originalTop = null;
+        
+        // 存储按钮原始位置信息 (相对父容器)
+        function storeOriginalPosition() {
+            if(!runawayBtn || !buttonZone) return;
+            const parentStyle = getComputedStyle(buttonZone);
+            if(parentStyle.position !== 'relative' && parentStyle.position !== 'absolute') {
+                buttonZone.style.position = 'relative';
+            }
+            // 初始未设置 left/top 时，基于 offset
+            let leftVal = runawayBtn.style.left;
+            let topVal = runawayBtn.style.top;
+            if(!leftVal || leftVal === 'auto' || leftVal === '') {
+                const offsetLeft = runawayBtn.offsetLeft;
+                const offsetTop = runawayBtn.offsetTop;
+                originalLeft = offsetLeft;
+                originalTop = offsetTop;
+                runawayBtn.style.position = 'relative';
+                runawayBtn.style.left = offsetLeft + 'px';
+                runawayBtn.style.top = offsetTop + 'px';
+            } else {
+                originalLeft = parseFloat(leftVal);
+                originalTop = parseFloat(topVal);
+            }
+        }
+        
+        function resetButtonPosition() {
+            if(!runawayBtn || forgiven) return;
+            if(originalLeft !== null && originalTop !== null) {
+                runawayBtn.style.left = originalLeft + 'px';
+                runawayBtn.style.top = originalTop + 'px';
+                runawayBtn.style.position = 'relative';
+            } else {
+                runawayBtn.style.position = 'relative';
+                runawayBtn.style.left = '0px';
+                runawayBtn.style.top = '0px';
+            }
+            runawayBtn.style.display = 'inline-flex';
+            runawayBtn.style.opacity = '1';
+            runawayBtn.disabled = false;
+            runawayBtn.style.cursor = 'pointer';
+        }
+        
+        // 移动逃跑按钮（保持父容器边界内）
+        function moveRunawayButton(useMouse = false, mouseX = null, mouseY = null) {
+            if(forgiven) return;
+            if(!runawayBtn || !buttonZone) return;
+            const parentRect = buttonZone.getBoundingClientRect();
+            const btnRect = runawayBtn.getBoundingClientRect();
+            const btnWidth = btnRect.width;
+            const btnHeight = btnRect.height;
+            
+            let currentLeft = parseFloat(runawayBtn.style.left);
+            let currentTop = parseFloat(runawayBtn.style.top);
+            if(isNaN(currentLeft)) currentLeft = 0;
+            if(isNaN(currentTop)) currentTop = 0;
+            
+            const padding = 8;
+            const maxLeft = parentRect.width - btnWidth - padding;
+            const maxTop = parentRect.height - btnHeight - padding;
+            const minLeft = padding;
+            const minTop = padding;
+            
+            let newLeft, newTop;
+            if(useMouse && mouseX && mouseY) {
+                // 逃离鼠标方向
+                const mouseRelativeX = mouseX - parentRect.left;
+                const mouseRelativeY = mouseY - parentRect.top;
+                let dx = (currentLeft + btnWidth/2) - mouseRelativeX;
+                let dy = (currentTop + btnHeight/2) - mouseRelativeY;
+                if(Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) { dx = 1; dy = 0; }
+                const len = Math.hypot(dx, dy);
+                if(len > 0.01) {
+                    dx = dx / len;
+                    dy = dy / len;
+                }
+                const power = Math.min(85, 45 + rejectCount * 2.5);
+                let moveX = dx * power + (Math.random() - 0.5) * 30;
+                let moveY = dy * power + (Math.random() - 0.5) * 30;
+                newLeft = currentLeft + moveX;
+                newTop = currentTop + moveY;
+            } else {
+                // 随机弹跳
+                newLeft = currentLeft + (Math.random() - 0.5) * 110;
+                newTop = currentTop + (Math.random() - 0.5) * 80;
+            }
+            
+            newLeft = Math.min(maxLeft, Math.max(minLeft, newLeft));
+            newTop = Math.min(maxTop, Math.max(minLeft, newTop));
+            
+            runawayBtn.style.transition = 'left 0.09s ease-out, top 0.09s ease-out';
+            runawayBtn.style.left = newLeft + 'px';
+            runawayBtn.style.top = newTop + 'px';
+            setTimeout(() => {
+                if(runawayBtn) runawayBtn.style.transition = '';
+            }, 100);
+        }
+        
+        // 拒绝逻辑 (不原谅)
+        function onReject(event) {
+            if(forgiven) return;
+            rejectCount++;
+            counterSpan.innerText = rejectCount;
+            
+            // 动态更改文案增加直男式幽默 (保持简洁)
+            const quoteDiv = document.querySelector('.quote-line');
+            if(rejectCount === 3) {
+                if(quoteDiv) quoteDiv.innerHTML = '→ 被拒3次，我继续蹲守，再给次机会 →';
+            } else if(rejectCount === 6) {
+                if(quoteDiv) quoteDiv.innerHTML = '→ 第六次了… 手累了吧？但我真的知错了 →';
+            } else if(rejectCount === 10) {
+                if(quoteDiv) quoteDiv.innerHTML = '→ 拒绝10次成就达成，诚意可鉴，原谅我呗 →';
+            } else if(rejectCount > 12) {
+                if(quoteDiv && !quoteDiv.innerHTML.includes('耐力')) 
+                    quoteDiv.innerHTML = '→ 耐力MAX，请收下这份认真 →';
+            }
+            
+            // 移动按钮（根据鼠标位置逃跑）
+            if(event && event.clientX) {
+                moveRunawayButton(true, event.clientX, event.clientY);
+            } else {
+                moveRunawayButton(false);
+            }
+            
+            // 简单视觉反馈
+            const titleIcon = document.querySelector('.title');
+            if(titleIcon) {
+                titleIcon.style.transform = 'scale(0.98)';
+                setTimeout(() => { if(titleIcon) titleIcon.style.transform = ''; }, 120);
+            }
+        }
+        
+        // 鼠标悬浮逃跑效果 (更调皮但不过分)
+        function onHoverRunaway(e) {
+            if(forgiven) return;
+            if(!runawayBtn) return;
+            if(e && e.clientX) {
+                moveRunawayButton(true, e.clientX, e.clientY);
+            } else {
+                moveRunawayButton(false);
+            }
+            // 轻微抖动
+            runawayBtn.style.transform = 'rotate(1deg)';
+            setTimeout(() => { if(runawayBtn) runawayBtn.style.transform = ''; }, 100);
+        }
+        
+        // 接受道歉 / 原谅
+        function onForgive() {
+            if(forgiven) return;
+            forgiven = true;
+            
+            // 隐藏原卡片按钮区域和计数器
+            buttonZone.style.display = 'none';
+            if(counterBox) counterBox.style.display = 'none';
+            card.style.display = 'none';
+            
+            // 显示成功面板
+            successPanel.classList.remove('hidden');
+            
+            // 展示最终拒绝次数
+            const finalMsgSpan = document.getElementById('finalCountMsg');
+            if(finalMsgSpan) {
+                if(rejectCount === 0) {
+                    finalMsgSpan.innerHTML = '✓ 一次就通过，感谢你的爽快！';
+                } else {
+                    finalMsgSpan.innerHTML = `📌 被拒绝 ${rejectCount} 次，依然等到你的谅解 · 说到做到`;
+                }
+            }
+            
+            // 轻微纸屑特效（简约一点，避免花哨）
+            createSimpleEffect();
+            document.title = '感谢谅解 | 说到做到';
+        }
+        
+        // 轻量特效 (点状粒子)
+        function createSimpleEffect() {
+            const colors = ['#2c7cb6', '#5f9dc9', '#87b9df', '#c0dcf5'];
+            for(let i = 0; i < 45; i++) {
+                const particle = document.createElement('div');
+                particle.textContent = '•';
+                particle.style.position = 'fixed';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = window.innerHeight - 30 + 'px';
+                particle.style.fontSize = (14 + Math.random() * 22) + 'px';
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                particle.style.opacity = '0.8';
+                particle.style.transition = 'all 1s cubic-bezier(0.2, 0.9, 0.4, 1)';
+                document.body.appendChild(particle);
+                const randomX = (Math.random() - 0.5) * 200;
+                const randomY = -Math.random() * 180 - 30;
+                particle.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${Math.random() * 90}deg)`;
+                particle.style.opacity = '0';
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+        
+        // 重置所有状态（重新开始道歉）
+        function resetAll() {
+            forgiven = false;
+            rejectCount = 0;
+            counterSpan.innerText = '0';
+            
+            // 显示主卡片，隐藏成功面板
+            card.style.display = 'block';
+            successPanel.classList.add('hidden');
+            buttonZone.style.display = 'flex';
+            if(counterBox) counterBox.style.display = 'inline-block';
+            
+            // 重置按钮位置
+            if(runawayBtn) {
+                runawayBtn.style.display = 'inline-flex';
+                runawayBtn.disabled = false;
+                resetButtonPosition();
+            }
+            
+            // 重置文案
+            const quoteDiv = document.querySelector('.quote-line');
+            if(quoteDiv) quoteDiv.innerHTML = '→ 接受这份道歉，咱们还是好兄弟 ←';
+            
+            // 清理可能残留样式
+            const titleIcon = document.querySelector('.title');
+            if(titleIcon) titleIcon.style.transform = '';
+            
+            document.title = '诚恳道歉 | 这次是我错了';
+        }
+        
+        // 绑定事件 + 窗口大小自适应
+        function bindEvents() {
+            forgiveBtn.addEventListener('click', onForgive);
+            runawayBtn.addEventListener('click', onReject);
+            runawayBtn.addEventListener('mouseenter', onHoverRunaway);
+            const resetBtn = document.getElementById('resetBtn');
+            if(resetBtn) resetBtn.addEventListener('click', resetAll);
+            
+            window.addEventListener('resize', () => {
+                if(!forgiven && runawayBtn && buttonZone) {
+                    // 边界修正
+                    const parentRect = buttonZone.getBoundingClientRect();
+                    const btnRect = runawayBtn.getBoundingClientRect();
+                    let currentLeft = parseFloat(runawayBtn.style.left);
+                    let currentTop = parseFloat(runawayBtn.style.top);
+                    if(isNaN(currentLeft)) currentLeft = 0;
+                    if(isNaN(currentTop)) currentTop = 0;
+                    const maxLeft = parentRect.width - btnRect.width - 8;
+                    const maxTop = parentRect.height - btnRect.height - 8;
+                    let newLeft = Math.min(maxLeft, Math.max(8, currentLeft));
+                    let newTop = Math.min(maxTop, Math.max(8, currentTop));
+                    if(newLeft !== currentLeft || newTop !== currentTop) {
+                        runawayBtn.style.left = newLeft + 'px';
+                        runawayBtn.style.top = newTop + 'px';
+                    }
+                }
+            });
+        }
+        
+        // 初始化
+        function init() {
+            if(buttonZone && getComputedStyle(buttonZone).position !== 'relative') {
+                buttonZone.style.position = 'relative';
+            }
+            storeOriginalPosition();
+            resetButtonPosition();
+            bindEvents();
+            // 初次调皮偏移一点增加趣味但不影响体验
+            setTimeout(() => {
+                if(runawayBtn && !forgiven) {
+                    moveRunawayButton(false);
+                }
+            }, 300);
+        }
+        
+        init();
+    })();
+</script>
+</body>
+</html>
