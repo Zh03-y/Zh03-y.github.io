@@ -136,32 +136,70 @@
             letter-spacing: 0.3px;
         }
 
-        /* 简约几何图案 - 不用动物/可爱元素 */
-        .pattern-area {
+        /* ========= 修改区域：可爱可动元素样式 ========= */
+        .cute-pattern-area {
             display: flex;
             justify-content: center;
-            gap: 18px;
-            margin: 16px 0 12px;
+            gap: 24px;
+            margin: 20px 0 16px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
-        .geo-shape {
-            width: 44px;
-            height: 44px;
-            background: transparent;
-            border-radius: 12px;
+        .cute-item {
+            width: 52px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: #3c7a9e;
-            transition: all 0.2s;
-            border: 1.5px solid #bdd8f0;
-            background: rgba(255,255,255,0.6);
+            font-size: 2rem;
+            cursor: default;
+            transition: all 0.2s ease;
+            animation: floatSoft 2s infinite ease-in-out;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
-        /* 按钮区域 */
+        /* 每个小动物不同的动画延迟，让节奏错落可爱 */
+        .cute-item:nth-child(1) { animation-delay: 0s; animation-duration: 1.8s; }
+        .cute-item:nth-child(2) { animation-delay: 0.3s; animation-duration: 2.2s; }
+        .cute-item:nth-child(3) { animation-delay: 0.6s; animation-duration: 2s; }
+        .cute-item:nth-child(4) { animation-delay: 0.9s; animation-duration: 1.9s; }
+
+        @keyframes floatSoft {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* 悬浮微动 + 心跳效果（鼠标悬停时） */
+        .cute-item:hover {
+            animation: bounceHeart 0.4s ease-in-out;
+            transform: scale(1.15);
+        }
+
+        @keyframes bounceHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* 旋转效果给特定元素增加动态 */
+        .cute-item.spin-once:hover {
+            animation: spinQuick 0.5s ease-out;
+        }
+
+        @keyframes spinQuick {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 按钮区域及其他保持不变 */
         .button-zone {
             margin: 28px 0 16px;
             display: flex;
@@ -203,7 +241,6 @@
             box-shadow: 0 1px 0 #175d8a;
         }
 
-        /* 逃跑按钮 - 灰色/冷色调 */
         .btn-runaway {
             background: #e2e8f0;
             color: #2c5a7a;
@@ -235,7 +272,6 @@
             opacity: 0.7;
         }
 
-        /* 成功面板 - 蓝色清爽风 */
         .success-area {
             background: #eef5fc;
             border-radius: 32px;
@@ -305,7 +341,6 @@
             display: none;
         }
 
-        /* 响应式 */
         @media (max-width: 550px) {
             .apology-card {
                 padding: 24px 20px 32px;
@@ -317,10 +352,13 @@
                 font-size: 0.95rem;
                 padding: 10px 22px;
             }
-            .geo-shape {
-                width: 36px;
-                height: 36px;
-                font-size: 1.3rem;
+            .cute-item {
+                width: 42px;
+                height: 42px;
+                font-size: 1.6rem;
+            }
+            .cute-pattern-area {
+                gap: 16px;
             }
         }
     </style>
@@ -334,20 +372,20 @@
     <div class="sub">诚恳致歉 · 绝无下次</div>
 
     <div class="message-box">
-        <p>兄弟 / 老铁：</p>
-        <p>这次是我考虑不周，<span class="highlight">把事情搞砸了</span>。<br>
-        让你感到不爽或者失望，真的过意不去。</p>
-        <p>我已经认真反思过了，该认的错绝不狡辩。<br>
-        希望能给个机会，让我弥补。</p>
-        <div class="quote-line">→ 接受这份道歉，咱们还是好兄弟 ←</div>
+        <p>亲爱的老哥：</p>
+        <p>我真的知道错了，<span class="highlight">对不起啦</span>。<br>
+        让你感到不舒服或者失望，真的过意不去。</p>
+        <p>这几天我一直在反思自己，我不该无缘无故发脾气的，真的只是太害怕你会不跟我玩了。<br>
+        希望您大人不记小人过，别跟我这小屁孩一般见识啦。</p>
+        <div class="quote-line">→ 接受这份道歉，咱们还是好朋友 ←</div>
     </div>
 
-    <!-- 简约几何图案，不用动物/可爱风 -->
-    <div class="pattern-area">
-        <div class="geo-shape">■</div>
-        <div class="geo-shape">●</div>
-        <div class="geo-shape">▲</div>
-        <div class="geo-shape">◆</div>
+    <!-- 修改区域：可爱的可动元素，替代原来的简约几何图案 -->
+    <div class="cute-pattern-area">
+        <div class="cute-item" id="cutePanda">🐼</div>
+        <div class="cute-item" id="cuteBear">🐻‍❄️</div>
+        <div class="cute-item" id="cuteRabbit">🐰</div>
+        <div class="cute-item" id="cuteStar">✨</div>
     </div>
 
     <div class="button-zone" id="buttonZone">
@@ -356,16 +394,16 @@
     </div>
 
     <div class="attempt-counter" id="counterBox">
-        被拒绝了 <span id="attemptCount">0</span> 次 · 但我态度诚恳
+        被拒绝了 <span id="attemptCount">0</span> 次 · 但我态度依旧诚恳
     </div>
-    <footer>· 点击「接受道歉」解锁诚意 · 点「不太满意」我会更认真 ·</footer>
+    <footer>· 点击「接受道歉」解锁诚意 · 点「不太满意」我会更认真的 ·</footer>
 </div>
 
 <!-- 成功面板 -->
 <div id="successPanel" class="success-area hidden">
     <div style="font-size: 2.8rem;">🤝 ✓</div>
-    <h2>感谢信任</h2>
-    <p>你的大度让我惭愧，之后一定用行动证明。</p>
+    <h2>感谢原谅</h2>
+    <p>我就知道老哥最好了，爱你。</p>
     <div class="badge-count" id="finalCountMsg"></div>
     <button class="reset-btn" id="resetBtn">⟳ 重新来过</button>
 </div>
@@ -381,6 +419,9 @@
         const buttonZone = document.getElementById('buttonZone');
         const counterBox = document.getElementById('counterBox');
 
+        // 获取可爱元素，增加额外互动（点击小动物也会轻微表达歉意互动）
+        const cuteItems = document.querySelectorAll('.cute-item');
+        
         let rejectCount = 0;           // 拒绝次数
         let forgiven = false;          // 是否已经原谅/接受道歉
         let originalLeft = null;
@@ -393,7 +434,6 @@
             if(parentStyle.position !== 'relative' && parentStyle.position !== 'absolute') {
                 buttonZone.style.position = 'relative';
             }
-            // 初始未设置 left/top 时，基于 offset
             let leftVal = runawayBtn.style.left;
             let topVal = runawayBtn.style.top;
             if(!leftVal || leftVal === 'auto' || leftVal === '') {
@@ -427,7 +467,6 @@
             runawayBtn.style.cursor = 'pointer';
         }
         
-        // 移动逃跑按钮（保持父容器边界内）
         function moveRunawayButton(useMouse = false, mouseX = null, mouseY = null) {
             if(forgiven) return;
             if(!runawayBtn || !buttonZone) return;
@@ -449,7 +488,6 @@
             
             let newLeft, newTop;
             if(useMouse && mouseX && mouseY) {
-                // 逃离鼠标方向
                 const mouseRelativeX = mouseX - parentRect.left;
                 const mouseRelativeY = mouseY - parentRect.top;
                 let dx = (currentLeft + btnWidth/2) - mouseRelativeX;
@@ -466,7 +504,6 @@
                 newLeft = currentLeft + moveX;
                 newTop = currentTop + moveY;
             } else {
-                // 随机弹跳
                 newLeft = currentLeft + (Math.random() - 0.5) * 110;
                 newTop = currentTop + (Math.random() - 0.5) * 80;
             }
@@ -482,13 +519,11 @@
             }, 100);
         }
         
-        // 拒绝逻辑 (不原谅)
         function onReject(event) {
             if(forgiven) return;
             rejectCount++;
             counterSpan.innerText = rejectCount;
             
-            // 动态更改文案增加直男式幽默 (保持简洁)
             const quoteDiv = document.querySelector('.quote-line');
             if(rejectCount === 3) {
                 if(quoteDiv) quoteDiv.innerHTML = '→ 被拒3次，我继续蹲守，再给次机会 →';
@@ -498,25 +533,28 @@
                 if(quoteDiv) quoteDiv.innerHTML = '→ 拒绝10次成就达成，诚意可鉴，原谅我呗 →';
             } else if(rejectCount > 12) {
                 if(quoteDiv && !quoteDiv.innerHTML.includes('耐力')) 
-                    quoteDiv.innerHTML = '→ 耐力MAX，请收下这份认真 →';
+                    quoteDiv.innerHTML = '→ 耐力MAX，请收下这份道歉 →';
             }
             
-            // 移动按钮（根据鼠标位置逃跑）
             if(event && event.clientX) {
                 moveRunawayButton(true, event.clientX, event.clientY);
             } else {
                 moveRunawayButton(false);
             }
             
-            // 简单视觉反馈
             const titleIcon = document.querySelector('.title');
             if(titleIcon) {
                 titleIcon.style.transform = 'scale(0.98)';
                 setTimeout(() => { if(titleIcon) titleIcon.style.transform = ''; }, 120);
             }
+
+            // 增加可爱互动：拒绝时所有小动物晃动一下表示安慰
+            cuteItems.forEach(item => {
+                item.style.transform = 'scale(0.9)';
+                setTimeout(() => { if(item) item.style.transform = ''; }, 150);
+            });
         }
         
-        // 鼠标悬浮逃跑效果 (更调皮但不过分)
         function onHoverRunaway(e) {
             if(forgiven) return;
             if(!runawayBtn) return;
@@ -525,25 +563,20 @@
             } else {
                 moveRunawayButton(false);
             }
-            // 轻微抖动
             runawayBtn.style.transform = 'rotate(1deg)';
             setTimeout(() => { if(runawayBtn) runawayBtn.style.transform = ''; }, 100);
         }
         
-        // 接受道歉 / 原谅
         function onForgive() {
             if(forgiven) return;
             forgiven = true;
             
-            // 隐藏原卡片按钮区域和计数器
             buttonZone.style.display = 'none';
             if(counterBox) counterBox.style.display = 'none';
             card.style.display = 'none';
             
-            // 显示成功面板
             successPanel.classList.remove('hidden');
             
-            // 展示最终拒绝次数
             const finalMsgSpan = document.getElementById('finalCountMsg');
             if(finalMsgSpan) {
                 if(rejectCount === 0) {
@@ -553,12 +586,10 @@
                 }
             }
             
-            // 轻微纸屑特效（简约一点，避免花哨）
             createSimpleEffect();
             document.title = '感谢谅解 | 说到做到';
         }
         
-        // 轻量特效 (点状粒子)
         function createSimpleEffect() {
             const colors = ['#2c7cb6', '#5f9dc9', '#87b9df', '#c0dcf5'];
             for(let i = 0; i < 45; i++) {
@@ -582,37 +613,31 @@
             }
         }
         
-        // 重置所有状态（重新开始道歉）
         function resetAll() {
             forgiven = false;
             rejectCount = 0;
             counterSpan.innerText = '0';
             
-            // 显示主卡片，隐藏成功面板
             card.style.display = 'block';
             successPanel.classList.add('hidden');
             buttonZone.style.display = 'flex';
             if(counterBox) counterBox.style.display = 'inline-block';
             
-            // 重置按钮位置
             if(runawayBtn) {
                 runawayBtn.style.display = 'inline-flex';
                 runawayBtn.disabled = false;
                 resetButtonPosition();
             }
             
-            // 重置文案
             const quoteDiv = document.querySelector('.quote-line');
-            if(quoteDiv) quoteDiv.innerHTML = '→ 接受这份道歉，咱们还是好兄弟 ←';
+            if(quoteDiv) quoteDiv.innerHTML = '→ 接受这份道歉，咱们还是好朋友 ←';
             
-            // 清理可能残留样式
             const titleIcon = document.querySelector('.title');
             if(titleIcon) titleIcon.style.transform = '';
             
             document.title = '诚恳道歉 | 这次是我错了';
         }
         
-        // 绑定事件 + 窗口大小自适应
         function bindEvents() {
             forgiveBtn.addEventListener('click', onForgive);
             runawayBtn.addEventListener('click', onReject);
@@ -620,9 +645,35 @@
             const resetBtn = document.getElementById('resetBtn');
             if(resetBtn) resetBtn.addEventListener('click', resetAll);
             
+            // 给小动物增加可爱的点击特效（不干扰主要逻辑，单纯增加萌感）
+            cuteItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(!forgiven) {
+                        item.style.transform = 'scale(1.2)';
+                        setTimeout(() => { item.style.transform = ''; }, 200);
+                        // 播放微妙的小提示，让道歉氛围更轻松
+                        const tempMsg = document.createElement('div');
+                        tempMsg.textContent = '🐣 原谅他吧～';
+                        tempMsg.style.position = 'fixed';
+                        tempMsg.style.bottom = '20px';
+                        tempMsg.style.left = '50%';
+                        tempMsg.style.transform = 'translateX(-50%)';
+                        tempMsg.style.backgroundColor = 'rgba(44,124,182,0.9)';
+                        tempMsg.style.color = 'white';
+                        tempMsg.style.padding = '6px 14px';
+                        tempMsg.style.borderRadius = '40px';
+                        tempMsg.style.fontSize = '0.8rem';
+                        tempMsg.style.zIndex = '1000';
+                        tempMsg.style.fontWeight = '500';
+                        tempMsg.style.pointerEvents = 'none';
+                        document.body.appendChild(tempMsg);
+                        setTimeout(() => tempMsg.remove(), 1000);
+                    }
+                });
+            });
+            
             window.addEventListener('resize', () => {
                 if(!forgiven && runawayBtn && buttonZone) {
-                    // 边界修正
                     const parentRect = buttonZone.getBoundingClientRect();
                     const btnRect = runawayBtn.getBoundingClientRect();
                     let currentLeft = parseFloat(runawayBtn.style.left);
@@ -641,7 +692,6 @@
             });
         }
         
-        // 初始化
         function init() {
             if(buttonZone && getComputedStyle(buttonZone).position !== 'relative') {
                 buttonZone.style.position = 'relative';
@@ -649,7 +699,6 @@
             storeOriginalPosition();
             resetButtonPosition();
             bindEvents();
-            // 初次调皮偏移一点增加趣味但不影响体验
             setTimeout(() => {
                 if(runawayBtn && !forgiven) {
                     moveRunawayButton(false);
