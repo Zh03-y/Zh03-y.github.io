@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>林间小径 · 个人主页</title>
-    <!-- 简洁优雅，绿色自然风格，响应式布局 -->
+    <title>林间小径 · 绿意个人主页 | 雨恋茶香</title>
+    <!-- 简洁绿色主题，包含小说板块入口，点击可跳转至独立小说页面 novel.html -->
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             scroll-behavior: smooth;
         }
 
-        /* 自定义滚动条 - 柔和绿色 */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -42,7 +41,7 @@
             padding: 2rem 1.5rem;
         }
 
-        /* 头部导航 - 极简半透玻璃效果 */
+        /* 头部导航 */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -50,7 +49,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             padding: 1rem 0;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             border-bottom: 1px solid rgba(90, 140, 85, 0.25);
             backdrop-filter: blur(2px);
         }
@@ -66,14 +65,6 @@
             text-decoration: none;
         }
 
-        .logo span {
-            font-weight: 300;
-            color: #417b3e;
-            background: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
-        }
-
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -85,7 +76,6 @@
             font-weight: 500;
             color: #2a4b2a;
             transition: all 0.2s ease;
-            font-size: 1rem;
             position: relative;
         }
 
@@ -109,14 +99,14 @@
             width: 100%;
         }
 
-        /* 主视觉区 Hero */
+        /* Hero区 */
         .hero {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 2rem;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
             padding: 1rem 0;
         }
 
@@ -134,8 +124,6 @@
             font-size: 0.8rem;
             font-weight: 500;
             margin-bottom: 1.2rem;
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(2px);
         }
 
         .hero-content h1 {
@@ -215,7 +203,6 @@
             flex: 0.8;
             display: flex;
             justify-content: center;
-            align-items: center;
         }
 
         .avatar-card {
@@ -224,44 +211,26 @@
             padding: 0.8rem;
             background: linear-gradient(135deg, #ffffff, #f4fef0);
             box-shadow: 0 20px 35px -12px rgba(60, 90, 50, 0.25);
-            transition: transform 0.3s ease;
         }
 
-        .avatar-card:hover {
-            transform: scale(1.01);
-        }
-
-        .avatar-img {
+        .avatar-placeholder {
             width: 260px;
             height: 260px;
-            object-fit: cover;
-            border-radius: 38% 62% 55% 45% / 53% 44% 56% 47%;
-            background: #cbe5c2;
-            display: block;
-            margin: 0 auto;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
-        }
-
-        /* 模拟头像 —— 绿色抽象植物风格 (纯CSS装饰, 也可以用emoji/svg) */
-        .avatar-placeholder {
-            width: 100%;
-            height: 100%;
             background: radial-gradient(circle at 30% 35%, #9bcd8c, #528a48);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 5rem;
-            font-weight: 400;
+            border-radius: 38% 62% 55% 45% / 53% 44% 56% 47%;
             color: white;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* 特色卡片区域 */
+        /* 通用板块标题 */
         .section-title {
             text-align: center;
             font-size: 2rem;
             font-weight: 600;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             color: #244d27;
             position: relative;
         }
@@ -276,6 +245,7 @@
             border-radius: 4px;
         }
 
+        /* 卡片网格 (用于技能/服务) */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -288,7 +258,7 @@
             backdrop-filter: blur(4px);
             border-radius: 32px;
             padding: 1.8rem;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.3s ease;
             border: 1px solid rgba(110, 166, 100, 0.3);
             box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
         }
@@ -297,55 +267,102 @@
             transform: translateY(-6px);
             background: white;
             border-color: #8fc284;
-            box-shadow: 0 24px 36px -16px rgba(70, 110, 60, 0.2);
         }
 
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: 1.2rem;
-            display: inline-block;
-            background: #eef9e9;
-            padding: 0.6rem;
-            border-radius: 24px;
         }
 
         .card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
-            font-weight: 600;
             color: #2c5e2c;
         }
 
-        .card p {
-            color: #3c5e3a;
-            line-height: 1.5;
-            margin-bottom: 1.2rem;
+        /* 小说板块 —— 精美入口卡片，点击跳转到独立小说页面 novel.html */
+        .novel-entry-block {
+            background: linear-gradient(125deg, #eef9e8, #fafff5);
+            border-radius: 48px;
+            margin: 2rem 0 3rem 0;
+            padding: 2rem 2rem;
+            border: 1px solid #b6daab;
+            box-shadow: 0 20px 30px -16px rgba(70, 110, 60, 0.2);
+            transition: transform 0.2s ease;
         }
-
-        .card-link {
-            text-decoration: none;
+        .novel-entry-block:hover {
+            transform: scale(1.01);
+            background: white;
+        }
+        .novel-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .novel-text {
+            flex: 2;
+        }
+        .novel-text h2 {
+            font-size: 2rem;
+            color: #2a652c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .novel-badge {
+            background-color: #cbe5c0;
+            color: #2b6530;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
             font-weight: 500;
-            color: #3b8740;
+        }
+        .novel-text p {
+            margin: 1rem 0 1.2rem 0;
+            color: #2f5430;
+            line-height: 1.5;
+        }
+        /* 主要跳转按钮 */
+        .btn-novel {
+            background: #2d6e32;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: gap 0.2s;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(45, 110, 50, 0.3);
+        }
+        .btn-novel:hover {
+            background: #1f5623;
+            transform: translateY(-2px);
+        }
+        .novel-cover-mini {
+            flex: 0.7;
+            background: #dff0d8;
+            border-radius: 32px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 4rem;
+            box-shadow: 0 12px 18px rgba(0,0,0,0.05);
         }
 
-        .card-link:hover {
-            gap: 10px;
-            color: #236b28;
-        }
-
-        /* 技能/趣味区域 - 绿色标签 */
+        /* 技能标签 */
         .skill-section {
             background: rgba(215, 235, 205, 0.5);
             border-radius: 48px;
-            padding: 2rem 2rem;
-            margin-bottom: 4rem;
-            backdrop-filter: blur(4px);
+            padding: 2rem;
+            margin-bottom: 3rem;
         }
-
         .skill-flex {
             display: flex;
             flex-wrap: wrap;
@@ -353,132 +370,58 @@
             gap: 1rem;
             margin-top: 1rem;
         }
-
         .skill-tag {
             background: white;
             padding: 0.6rem 1.4rem;
             border-radius: 60px;
             font-weight: 500;
             color: #2d6430;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
             border: 1px solid #cde2c4;
-            transition: all 0.2s;
         }
-
-        .skill-tag:hover {
-            background: #498a47;
-            color: white;
-            border-color: #498a47;
-            transform: scale(1.02);
-        }
-
-        /* 页脚 */
         .footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             padding: 2rem 0 1.5rem;
             text-align: center;
             border-top: 1px solid rgba(90, 130, 80, 0.2);
             color: #457a43;
-            font-size: 0.9rem;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1.8rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
-
         .social-links a {
             color: #457a43;
             text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
-
-        .social-links a:hover {
-            color: #236b2a;
-            transform: translateY(-2px);
-        }
-
-        /* 响应式 */
         @media (max-width: 780px) {
-            .container {
-                padding: 1.5rem;
-            }
-            .hero-content h1 {
-                font-size: 2.4rem;
-            }
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .nav-links {
-                gap: 1.2rem;
-                flex-wrap: wrap;
-            }
-            .avatar-img {
-                width: 200px;
-                height: 200px;
-            }
-            .hero {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .btn-group {
-                justify-content: center;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                padding: 1.4rem;
-            }
-            .skill-tag {
-                padding: 0.4rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* 小动画点缀 */
-        @keyframes softGlow {
-            0% { text-shadow: 0 0 0px rgba(80, 150, 70, 0);}
-            100% { text-shadow: 0 0 3px rgba(80, 150, 70, 0.3);}
-        }
-        .logo {
-            animation: softGlow 2s infinite alternate;
+            .hero-content h1 { font-size: 2.4rem; }
+            .novel-flex { flex-direction: column; text-align: center; }
+            .novel-text h2 { font-size: 1.6rem; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- 简约导航栏 -->
+    <!-- 导航栏 -->
     <nav class="navbar">
         <a href="#" class="logo">🌿 <span>leaf.studio</span></a>
         <ul class="nav-links">
             <li><a href="#">首页</a></li>
             <li><a href="#">作品</a></li>
-            <li><a href="#">日志</a></li>
+            <li><a href="novel.html" style="color:#2d8c2f;">小说</a></li>
             <li><a href="#">关于</a></li>
         </ul>
     </nav>
 
-    <!-- 主角介绍区 -->
+    <!-- Hero 区域 -->
     <div class="hero">
         <div class="hero-content">
             <div class="hero-badge">✦ 林中代码 · 可持续创造 ✦</div>
             <h1>设计·自然·<span class="hero-highlight">绿意生长</span></h1>
-            <p>你好，我是林一 — 独立开发者 & 视觉创作者。致力于优雅的界面与自然的数字体验，让技术像森林一样呼吸。</p>
+            <p>独立开发者 & 视觉创作者。让技术像森林一样呼吸，故事如茶香般温润。</p>
             <div class="btn-group">
                 <a href="#" class="btn-primary">✨ 探索作品集</a>
                 <a href="#" class="btn-outline">📄 联络交流</a>
@@ -486,42 +429,52 @@
         </div>
         <div class="hero-avatar">
             <div class="avatar-card">
-                <div class="avatar-img avatar-placeholder">
-                    🌱🍃
-                </div>
+                <div class="avatar-placeholder">🌱🍃</div>
             </div>
         </div>
     </div>
 
-    <!-- 核心服务卡片 简洁而有质感 -->
+    <!-- 小说入口板块：点击按钮直接跳转到独立小说页面 novel.html (完整跳转功能) -->
+    <div class="novel-entry-block">
+        <div class="novel-flex">
+            <div class="novel-text">
+                <h2>📖 雨恋茶香 · 新雨知茶 <span class="novel-badge">长篇治愈</span></h2>
+                <p>江南烟雨，一盏清茶，一份未寄出的信。当茶香氤氲了旧时光，雨季里相遇的两个人，能否在茶汤中泡出真心？<br>点击下方按钮，开启独立小说页面，沉浸式阅读并自由编辑你的故事。</p>
+                <!-- 跳转到独立的小说页面 novel.html -->
+                <a href="novel.html" class="btn-novel">🍃 进入小说板块 · 雨恋茶香 →</a>
+            </div>
+            <div class="novel-cover-mini">
+                🍵🌧️
+            </div>
+        </div>
+    </div>
+
+    <!-- 卡片展示区 (服务/技能展示) -->
     <div>
         <h2 class="section-title">专注领域 · 自然灵感</h2>
         <div class="cards-grid">
             <div class="card">
                 <div class="card-icon">🌲</div>
                 <h3>可持续设计</h3>
-                <p>低碳UI/UX，符合绿色美学的情感化设计，让界面传递环保理念与自然温度。</p>
-                <a href="#" class="card-link">了解更多 →</a>
+                <p>低碳UI/UX，融合自然情感，打造绿色数字体验。</p>
             </div>
             <div class="card">
                 <div class="card-icon">🍃</div>
                 <h3>前端开发</h3>
-                <p>现代HTML/CSS/JS，性能优先，响应式布局，像植物适应性一样兼容多端。</p>
-                <a href="#" class="card-link">查看项目 →</a>
+                <p>现代技术栈，响应式布局，优雅交互相伴。</p>
             </div>
             <div class="card">
                 <div class="card-icon">🌿</div>
-                <h3>创意工坊</h3>
-                <p>品牌视觉与动效设计，将自然纹理融入数字界面，创造令人愉悦的交互瞬间。</p>
-                <a href="#" class="card-link">灵感笔记 →</a>
+                <h3>创意写作</h3>
+                <p>文字与设计同源，小说「雨恋茶香」诠释叙事温度。</p>
             </div>
         </div>
     </div>
 
-    <!-- 兴趣 / 技能区块 绿色标签群组 -->
+    <!-- 技能标签区 -->
     <div class="skill-section">
         <div style="text-align: center; margin-bottom: 0.5rem;">
-            <span style="background: white; padding: 0.2rem 1rem; border-radius: 50px; font-weight: 500; color: #316e35;">🌱 常伴工具箱</span>
+            <span style="background: white; padding: 0.2rem 1rem; border-radius: 50px;">🌱 常伴工具箱</span>
         </div>
         <div class="skill-flex">
             <span class="skill-tag">Figma</span>
@@ -529,77 +482,21 @@
             <span class="skill-tag">Tailwind</span>
             <span class="skill-tag">Green Design</span>
             <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">GSAP</span>
-            <span class="skill-tag">UX Research</span>
+            <span class="skill-tag">GitHub Pages</span>
         </div>
-        <p style="text-align: center; margin-top: 1.8rem; font-size: 0.9rem; color: #528a4a;">“将代码写进自然韵律，让每一处点击都像穿过林间的风。”</p>
+        <p style="text-align: center; margin-top: 1.2rem; color:#528a4a;">“将代码写进自然韵律，故事泡进茶香”</p>
     </div>
 
-    <!-- 最新动态 / 近期文章 简练模块 -->
-    <div>
-        <h2 class="section-title">最新随笔 · 绿色思考</h2>
-        <div class="cards-grid" style="margin-bottom: 1rem;">
-            <div class="card" style="background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="background:#e0f3da; padding:0.2rem 0.8rem; border-radius: 30px; font-size:0.75rem;">设计观点</span>
-                    <span style="color:#6c9e68;">🌿 2025.04</span>
-                </div>
-                <h3 style="font-size:1.35rem;">自然主义UI的趋势与诗意</h3>
-                <p>从有机形态到生态色彩，构建与自然共鸣的数字空间，重新定义友好界面...</p>
-                <a href="#" class="card-link">阅读全文 →</a>
-            </div>
-            <div class="card" style="background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="background:#e0f3da; padding:0.2rem 0.8rem; border-radius: 30px; font-size:0.75rem;">技术实践</span>
-                    <span style="color:#6c9e68;">🍃 2025.03</span>
-                </div>
-                <h3 style="font-size:1.35rem;">GitHub Pages + 绿色工作流</h3>
-                <p>自动化部署与环境友好的静态站点，轻量、美观、零碳足迹的个人站方案...</p>
-                <a href="#" class="card-link">阅读全文 →</a>
-            </div>
-            <div class="card" style="background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <span style="background:#e0f3da; padding:0.2rem 0.8rem; border-radius: 30px; font-size:0.75rem;">灵感库</span>
-                    <span style="color:#6c9e68;">🎋 2025.02</span>
-                </div>
-                <h3 style="font-size:1.35rem;">森系配色系统分享</h3>
-                <p>一套基于自然的调色板，从苔藓绿到叶脉青，创造宁静舒适的数字庇护所。</p>
-                <a href="#" class="card-link">阅读全文 →</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- 优雅页脚 社交联系 -->
+    <!-- 页脚 -->
     <footer class="footer">
         <div class="social-links">
-            <a href="#" aria-label="GitHub">🐙 GitHub</a>
-            <a href="#" aria-label="Twitter">🐦 Twitter</a>
-            <a href="#" aria-label="Dribbble">🎨 Dribbble</a>
-            <a href="#" aria-label="Email">📧 邮件</a>
+            <a href="#">🐙 GitHub</a>
+            <a href="#">🐦 Twitter</a>
+            <a href="#">📧 邮件</a>
         </div>
-        <p>© 2025 林间小径 · 以绿意为底色 | 托管于 GitHub Pages</p>
-        <p style="margin-top: 0.5rem; font-size:0.8rem;">🌳 保持好奇，自然生长 🌳</p>
+        <p>© 2025 林间小径 · 绿意生长 | 小说《雨恋茶香》独立页面可自由编辑内容</p>
+        <p style="margin-top: 0.5rem;">🌳 阅读愉快，茶香常伴 🌳</p>
     </footer>
 </div>
-
-<!-- 极简平滑滚动效果（无需额外库） -->
-<script>
-    // 为所有锚点添加平滑滚动 (仅用于演示内部链接, 美观)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === "#" || href === "") return;
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    // 简单的控制台绿色标语
-    console.log("%c✨ Greenfolio | 简洁绿色个人主页 ✨", "color: #3b8740; font-size: 16px; font-weight: bold;");
-    console.log("%c设计自然·代码如林", "color: #5a9c4e;");
-</script>
 </body>
 </html>
